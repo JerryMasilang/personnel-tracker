@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personnel Tracker System</title>
+</head>
+<body>
+    <h1>Personnel Tracker System</h1>
+
+    <p>
+        <a href="{% url 'personnel_create' %}">Add New Personnel</a>
+    </p>
+
+    {% if personnel_records %}
+        <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Rank / Position</th>
+                    <th>Unit / Section</th>
+                    <th>Contact Number</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for person in personnel_records %}
+                <tr>
+                    <td>{{ person.full_name }}</td>
+                    <td>{{ person.rank_position }}</td>
+                    <td>{{ person.unit_section }}</td>
+                    <td>{{ person.contact_number }}</td>
+                    <td>
+                        <a href="{% url 'personnel_update' person.pk %}">Edit</a>
+                        |
+                        <a href="{% url 'personnel_delete' person.pk %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No personnel records found.</p>
+    {% endif %}
+</body>
+</html>
